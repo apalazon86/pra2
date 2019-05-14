@@ -1,0 +1,40 @@
+---
+title: "Práctica 2: Limpieza y validación de los datos"
+author: "Daniel Mirón Martínez, Alfonso Palazón González"
+date: "15 de mayo de 2019"
+output: 
+  html_document:
+    toc: yes
+    number_sections: yes
+    toc_depth: 2
+    toc_float: true 
+lang: es
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#Descripción del dataset. 
+**¿Por qué es importante y qué pregunta/problema pretende responder?**
+
+#Integración y selección de los datos de interés a analizar. 
+
+#Limpieza de los datos.
+##¿Los datos contienen ceros o elementos vacíos? ¿Cómo gestionarías cada uno de estos casos?
+##Identificación y tratamiento de valores extremos.
+
+#Análisis de los datos.
+##Selección de los grupos de datos que se quieren analizar/comparar (planificación de los análisis a aplicar).
+##Comprobación de la normalidad y homogeneidad de la varianza.
+##Aplicación de pruebas estadísticas para comparar los grupos de datos. 
+
+**En función de los datos y el objetivo del estudio, aplicar pruebas de contraste de hipótesis, correlaciones, regresiones, etc. Aplicar al menos tres métodos de análisis diferentes.**
+
+#Representación de los resultados a partir de tablas y gráficas.
+
+#Resolución del problema.
+**A partir de los resultados obtenidos, ¿cuáles son las conclusiones? ¿Los resultados permiten responder al problema?**
+
+#Código
+**Hay que adjuntar el código, preferiblemente en R, con el que se ha realizado la limpieza, análisis y representación de los datos. Si lo preferís, también podéis trabajar en Python.**
