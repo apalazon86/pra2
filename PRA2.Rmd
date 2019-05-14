@@ -1,6 +1,6 @@
 ---
-title: "Pr·ctica 2: Limpieza y validaciÛn de los datos"
-author: "Daniel MirÛn MartÌnez, Alfonso PalazÛn Gonz·lez"
+title: "Pr√°ctica 2: Limpieza y validaci√≥n de los datos"
+author: "Daniel Mir√≥n Mart√≠nez, Alfonso Palaz√≥n Gonz√°lez"
 date: "15 de mayo de 2019"
 output: 
   html_document:
@@ -15,26 +15,46 @@ lang: es
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-#DescripciÛn del dataset. 
-**øPor quÈ es importante y quÈ pregunta/problema pretende responder?**
+#Descripci√≥n del dataset
 
-#IntegraciÛn y selecciÛn de los datos de interÈs a analizar. 
+El dataset se ha descargado desde [Kaggle](https://www.kaggle.com/uciml/red-wine-quality-cortez-et-al-2009), contiene informaci√≥n sobre distintas variedades de un vino tinto portugu√©s conocido como "Vinho Verde". El dataset tiene un total de 12 campos y 1599 filas. Este es el detalle de los campos:
+
+* **fixed acidity**, acidez fija del vino, la cantidad de √°cidos que no se evaporan.
+* **volatile acidity**, acidez vol√°til del vino, o cantidad de √°cido ac√©tico. Valores altos producen un sabor avinagrado.
+* **citric acid**, √°cido c√≠trico, en peque√±as cantidades a√±ade frescor y sabor al vino.
+* **residual sugar**, az√∫car residual, es la cantidad de az√∫car que permanece en el vino una vez terminada la fermentaci√≥n. Como m√≠nimo suele haber un gramo de az√∫car por litro, a partir de 45g/l se considera que el vino es dulce.
+* **chlorides**, cloruros, cantidad de sal en el vino.
+* **free sulfur dioxide**, di√≥xido de azufre libre, previene el crecimiento de microbiios y la oxidaci√≥n del vino.
+* **total sulfur dioxide**, di√≥xido de azufre total, es muy dif√≠cil de detectar pero en concentraciones superiores a 50ppm el di√≥xido de azufre se siente al olfato y en el sabor del vino.
+* **density**, densidad, es similar a la del agua, y var√≠a seg√∫n la cantidad de alcohol y az√∫car.
+* **pH**, describe c√≥mo de √°cido es el vino en una escala de 0 (muy √°cido) a 14 (muy base). La mayor√≠a de vinos tienen un pH de entre 3 y 4.
+* **sulphates**, sulfatos, es un aditivo del vino que influye en los niveles de di√≥xido de azufre.
+* **alcohol**, porcentaje de alcohol que tiene el vino.
+* **quality**, calidad del vino, se trata de la variable de salida, y que var√≠a en una escala de 0 a 10.
+
+**¬øPor qu√© es importante y qu√© pregunta/problema pretende responder?**
+
+Se desea averiguar qu√© variables influyen m√°s en la calidad del vino. Se podr√° crear un modelo de regresi√≥n e ir probando distintos valores en las variables para ver c√≥mo podemos conseguir un vino de alta calidad.
+
+Este tipo de estudios pueden ser muy √∫tiles en la industria vin√≠cola, que mueve mucho dinero. Tambi√©n pueden servir a los sumillers o personal de hosteler√≠a para explicar a sus clientes qu√© cualidades tiene un determinado vino y hacer que su experiencia sea mejor.
+
+#Integraci√≥n y selecci√≥n de los datos de inter√©s a analizar. 
 
 #Limpieza de los datos.
-##øLos datos contienen ceros o elementos vacÌos? øCÛmo gestionarÌas cada uno de estos casos?
-##IdentificaciÛn y tratamiento de valores extremos.
+##¬øLos datos contienen ceros o elementos vac√≠os? ¬øC√≥mo gestionar√≠as cada uno de estos casos?
+##Identificaci√≥n y tratamiento de valores extremos.
 
-#An·lisis de los datos.
-##SelecciÛn de los grupos de datos que se quieren analizar/comparar (planificaciÛn de los an·lisis a aplicar).
-##ComprobaciÛn de la normalidad y homogeneidad de la varianza.
-##AplicaciÛn de pruebas estadÌsticas para comparar los grupos de datos. 
+#An√°lisis de los datos.
+##Selecci√≥n de los grupos de datos que se quieren analizar/comparar (planificaci√≥n de los an√°lisis a aplicar).
+##Comprobaci√≥n de la normalidad y homogeneidad de la varianza.
+##Aplicaci√≥n de pruebas estad√≠sticas para comparar los grupos de datos. 
 
-**En funciÛn de los datos y el objetivo del estudio, aplicar pruebas de contraste de hipÛtesis, correlaciones, regresiones, etc. Aplicar al menos tres mÈtodos de an·lisis diferentes.**
+**En funci√≥n de los datos y el objetivo del estudio, aplicar pruebas de contraste de hip√≥tesis, correlaciones, regresiones, etc. Aplicar al menos tres m√©todos de an√°lisis diferentes.**
 
-#RepresentaciÛn de los resultados a partir de tablas y gr·ficas.
+#Representaci√≥n de los resultados a partir de tablas y gr√°ficas.
 
-#ResoluciÛn del problema.
-**A partir de los resultados obtenidos, øcu·les son las conclusiones? øLos resultados permiten responder al problema?**
+#Resoluci√≥n del problema.
+**A partir de los resultados obtenidos, ¬øcu√°les son las conclusiones? ¬øLos resultados permiten responder al problema?**
 
-#CÛdigo
-**Hay que adjuntar el cÛdigo, preferiblemente en R, con el que se ha realizado la limpieza, an·lisis y representaciÛn de los datos. Si lo preferÌs, tambiÈn podÈis trabajar en Python.**
+#C√≥digo
+**Hay que adjuntar el c√≥digo, preferiblemente en R, con el que se ha realizado la limpieza, an√°lisis y representaci√≥n de los datos. Si lo prefer√≠s, tambi√©n pod√©is trabajar en Python.**
