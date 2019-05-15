@@ -1,6 +1,6 @@
 ---
-title: "Práctica 2: Limpieza y validación de los datos"
-author: "Daniel Mirón Martínez, Alfonso Palazón González"
+title: "Pr??ctica 2: Limpieza y validaci??n de los datos"
+author: "Daniel Mir??n Mart??nez, Alfonso Palaz??n Gonz??lez"
 date: "15 de mayo de 2019"
 output: 
   html_document:
@@ -15,46 +15,51 @@ lang: es
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-#Descripción del dataset
+#1. Descripci??n del dataset
 
-El dataset se ha descargado desde [Kaggle](https://www.kaggle.com/uciml/red-wine-quality-cortez-et-al-2009), contiene información sobre distintas variedades de un vino tinto portugués conocido como "Vinho Verde". El dataset tiene un total de 12 campos y 1599 filas. Este es el detalle de los campos:
+El dataset se ha descargado desde [Kaggle](https://www.kaggle.com/uciml/red-wine-quality-cortez-et-al-2009), contiene informaci??n sobre distintas variedades de un vino tinto portugu??s conocido como "Vinho Verde". El dataset tiene un total de 12 campos y 1599 filas. Este es el detalle de los campos:
 
-* **fixed acidity**, acidez fija del vino, la cantidad de ácidos que no se evaporan.
-* **volatile acidity**, acidez volátil del vino, o cantidad de ácido acético. Valores altos producen un sabor avinagrado.
-* **citric acid**, ácido cítrico, en pequeñas cantidades añade frescor y sabor al vino.
-* **residual sugar**, azúcar residual, es la cantidad de azúcar que permanece en el vino una vez terminada la fermentación. Como mínimo suele haber un gramo de azúcar por litro, a partir de 45g/l se considera que el vino es dulce.
+* **fixed acidity**, acidez fija del vino, la cantidad de ??cidos que no se evaporan.
+* **volatile acidity**, acidez vol??til del vino, o cantidad de ??cido ac??tico. Valores altos producen un sabor avinagrado.
+* **citric acid**, ??cido c??trico, en peque??as cantidades a??ade frescor y sabor al vino.
+* **residual sugar**, az??car residual, es la cantidad de az??car que permanece en el vino una vez terminada la fermentaci??n. Como m??nimo suele haber un gramo de az??car por litro, a partir de 45g/l se considera que el vino es dulce.
 * **chlorides**, cloruros, cantidad de sal en el vino.
-* **free sulfur dioxide**, dióxido de azufre libre, previene el crecimiento de microbiios y la oxidación del vino.
-* **total sulfur dioxide**, dióxido de azufre total, es muy difícil de detectar pero en concentraciones superiores a 50ppm el dióxido de azufre se siente al olfato y en el sabor del vino.
-* **density**, densidad, es similar a la del agua, y varía según la cantidad de alcohol y azúcar.
-* **pH**, describe cómo de ácido es el vino en una escala de 0 (muy ácido) a 14 (muy base). La mayoría de vinos tienen un pH de entre 3 y 4.
-* **sulphates**, sulfatos, es un aditivo del vino que influye en los niveles de dióxido de azufre.
+* **free sulfur dioxide**, di??xido de azufre libre, previene el crecimiento de microbiios y la oxidaci??n del vino.
+* **total sulfur dioxide**, di??xido de azufre total, es muy dif??cil de detectar pero en concentraciones superiores a 50ppm el di??xido de azufre se siente al olfato y en el sabor del vino.
+* **density**, densidad, es similar a la del agua, y var??a seg??n la cantidad de alcohol y az??car.
+* **pH**, describe c??mo de ??cido es el vino en una escala de 0 (muy ??cido) a 14 (muy base). La mayor??a de vinos tienen un pH de entre 3 y 4.
+* **sulphates**, sulfatos, es un aditivo del vino que influye en los niveles de di??xido de azufre.
 * **alcohol**, porcentaje de alcohol que tiene el vino.
-* **quality**, calidad del vino, se trata de la variable de salida, y que varía en una escala de 0 a 10.
+* **quality**, calidad del vino, se trata de la variable de salida, y que var??a en una escala de 0 a 10.
 
-**¿Por qué es importante y qué pregunta/problema pretende responder?**
+**??Por qu?? es importante y qu?? pregunta/problema pretende responder?**
 
-Se desea averiguar qué variables influyen más en la calidad del vino. Se podrá crear un modelo de regresión e ir probando distintos valores en las variables para ver cómo podemos conseguir un vino de alta calidad.
+Se desea averiguar qu?? variables influyen m??s en la calidad del vino. Se podr?? crear un modelo de regresi??n e ir probando distintos valores en las variables para ver c??mo podemos conseguir un vino de alta calidad.
 
-Este tipo de estudios pueden ser muy útiles en la industria vinícola, que mueve mucho dinero. También pueden servir a los sumillers o personal de hostelería para explicar a sus clientes qué cualidades tiene un determinado vino y hacer que su experiencia sea mejor.
+Este tipo de estudios pueden ser muy ??tiles en la industria vin??cola, que mueve mucho dinero. Tambi??n pueden servir a los sumillers o personal de hosteler??a para explicar a sus clientes qu?? cualidades tiene un determinado vino y hacer que su experiencia sea mejor.
 
-#Integración y selección de los datos de interés a analizar. 
+#2. Integraci??n y selecci??n de los datos de inter??s a analizar. 
 
-#Limpieza de los datos.
-##¿Los datos contienen ceros o elementos vacíos? ¿Cómo gestionarías cada uno de estos casos?
-##Identificación y tratamiento de valores extremos.
+```{r}
+wine <- read.csv2("winequality-red.csv", header=TRUE, sep=",")
+```
 
-#Análisis de los datos.
-##Selección de los grupos de datos que se quieren analizar/comparar (planificación de los análisis a aplicar).
-##Comprobación de la normalidad y homogeneidad de la varianza.
-##Aplicación de pruebas estadísticas para comparar los grupos de datos. 
 
-**En función de los datos y el objetivo del estudio, aplicar pruebas de contraste de hipótesis, correlaciones, regresiones, etc. Aplicar al menos tres métodos de análisis diferentes.**
+#3. Limpieza de los datos.
+##3.1. ??Los datos contienen ceros o elementos vac??os? ??C??mo gestionar??as cada uno de estos casos?
+##3.2. Identificaci??n y tratamiento de valores extremos.
 
-#Representación de los resultados a partir de tablas y gráficas.
+#4. An??lisis de los datos.
+##4.1. Selecci??n de los grupos de datos que se quieren analizar/comparar (planificaci??n de los an??lisis a aplicar).
+##4.2. Comprobaci??n de la normalidad y homogeneidad de la varianza.
+##4.3. Aplicaci??n de pruebas estad??sticas para comparar los grupos de datos. 
 
-#Resolución del problema.
-**A partir de los resultados obtenidos, ¿cuáles son las conclusiones? ¿Los resultados permiten responder al problema?**
+**En funci??n de los datos y el objetivo del estudio, aplicar pruebas de contraste de hip??tesis, correlaciones, regresiones, etc. Aplicar al menos tres m??todos de an??lisis diferentes.**
 
-#Código
-**Hay que adjuntar el código, preferiblemente en R, con el que se ha realizado la limpieza, análisis y representación de los datos. Si lo preferís, también podéis trabajar en Python.**
+#5. Representaci??n de los resultados a partir de tablas y gr??ficas.
+
+#6. Resoluci??n del problema.
+**A partir de los resultados obtenidos, ??cu??les son las conclusiones? ??Los resultados permiten responder al problema?**
+
+#7. C??digo
+**Hay que adjuntar el c??digo, preferiblemente en R, con el que se ha realizado la limpieza, an??lisis y representaci??n de los datos. Si lo prefer??s, tambi??n pod??is trabajar en Python.**
