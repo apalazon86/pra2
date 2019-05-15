@@ -58,6 +58,7 @@ wine$chlorides <- as.numeric( sub(",","\\.", wine$chlorides))
 wine$free.sulfur.dioxide <- as.numeric( sub(",","\\.", wine$free.sulfur.dioxide))
 wine$total.sulfur.dioxide <- as.numeric( sub(",","\\.", wine$total.sulfur.dioxide))
 wine$density <- as.numeric( sub(",","\\.", wine$density))
+wine$pH <- as.numeric( sub(",","\\.", wine$pH))
 wine$sulphates <- as.numeric( sub(",","\\.", wine$sulphates))
 wine$alcohol <- as.numeric( sub(",","\\.", wine$alcohol))
 
@@ -65,7 +66,24 @@ summary(wine)
 ```
 
 ##3.1. ??Los datos contienen ceros o elementos vac??os? ??C??mo gestionar??as cada uno de estos casos?
+No existen elementos vac??os, en el caso de los ceros, solo existen en la variable _citric.acid_. Consideramos que se trata de valores correctos de la variable. 
+
 ##3.2. Identificaci??n y tratamiento de valores extremos.
+
+```{r}
+boxplot(wine$fixed.acidity, main="fixed.acidity")
+boxplot(wine$volatile.acidity, main="volatile.acidity")
+boxplot(wine$citric.acid, main="citric.acid")
+boxplot(wine$residual.sugar, main="residual.sugar")
+boxplot(wine$chlorides, main="chlorides")
+boxplot(wine$free.sulfur.dioxide, main="free.sulfur.dioxide")
+boxplot(wine$total.sulfur.dioxide, main="total.sulfur.dioxide")
+boxplot(wine$density, main="density")
+boxplot(wine$pH, main="pH")
+boxplot(wine$sulphates, main="sulphates")
+boxplot(wine$alcohol, main="alcohol")
+```
+
 
 #4. An??lisis de los datos.
 ##4.1. Selecci??n de los grupos de datos que se quieren analizar/comparar (planificaci??n de los an??lisis a aplicar).
