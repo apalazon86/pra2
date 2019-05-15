@@ -45,7 +45,25 @@ wine <- read.csv2("winequality-red.csv", header=TRUE, sep=",")
 ```
 
 
+
 #3. Limpieza de los datos.
+
+
+```{r}
+wine$fixed.acidity <- as.numeric( sub(",","\\.", wine$fixed.acidity))
+wine$volatile.acidity <- as.numeric( sub(",","\\.", wine$volatile.acidity))
+wine$citric.acid <- as.numeric( sub(",","\\.", wine$citric.acid))
+wine$residual.sugar <- as.numeric( sub(",","\\.", wine$residual.sugar))
+wine$chlorides <- as.numeric( sub(",","\\.", wine$chlorides))
+wine$free.sulfur.dioxide <- as.numeric( sub(",","\\.", wine$free.sulfur.dioxide))
+wine$total.sulfur.dioxide <- as.numeric( sub(",","\\.", wine$total.sulfur.dioxide))
+wine$density <- as.numeric( sub(",","\\.", wine$density))
+wine$sulphates <- as.numeric( sub(",","\\.", wine$sulphates))
+wine$alcohol <- as.numeric( sub(",","\\.", wine$alcohol))
+
+summary(wine)
+```
+
 ##3.1. ??Los datos contienen ceros o elementos vac??os? ??C??mo gestionar??as cada uno de estos casos?
 ##3.2. Identificaci??n y tratamiento de valores extremos.
 
