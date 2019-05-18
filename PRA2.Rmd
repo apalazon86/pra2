@@ -15,6 +15,10 @@ lang: es
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r load_libraries, include=FALSE}
+library(knitr)
+```
+
 #Descripción del dataset
 
 El dataset se ha descargado desde [Kaggle](https://www.kaggle.com/uciml/red-wine-quality-cortez-et-al-2009), contiene información sobre distintas variedades de un vino tinto portugués conocido como "Vinho Verde". El dataset tiene un total de 12 campos y 1599 filas. Este es el detalle de los campos:
@@ -40,9 +44,101 @@ Este tipo de estudios pueden ser muy útiles en la industria vinícola, que muev
 
 #Integración y selección de los datos de interés a analizar. 
 
+A priori todos los datos parecen interesantes, sin tener más conocimiento sobre vinos, y sin haber hecho ningún test estadístico, no desecharemos ninguno de los atributos del dataset. 
+
+Posteriormente, si realizamos algún modelo de regresión podremos estudiar cómo afecta cada atributo a la calidad del vino, si existen atributos que no influyen demasiado, sí que podríamos eliminarlos, pero en este punto del análisis es demasiado pronto para hacerlo.
+
 #Limpieza de los datos.
+
+En primer lugar, vamos a cargar el csv en un dataframe, y mostraremos los primeros registros:
+
+```{r}
+wine <- read.csv2("winequality-red.csv", header=TRUE, sep=",")
+kable(head(wine))
+```
+
+Ahora Vamos a ver qué tipos asigna R a cada variable:
+
+```{r}
+tipos <- sapply(wine,class)
+kable(tipos)
+```
+
+Vamos a cambiar todas las variables de tipo factor por numeric:
+
+```{r}
+wine$fixed.acidity <- as.numeric( sub(",","\\.", wine$fixed.acidity))
+wine$volatile.acidity <- as.numeric( sub(",","\\.", wine$volatile.acidity))
+wine$citric.acid <- as.numeric( sub(",","\\.", wine$citric.acid))
+wine$residual.sugar <- as.numeric( sub(",","\\.", wine$residual.sugar))
+wine$chlorides <- as.numeric( sub(",","\\.", wine$chlorides))
+wine$free.sulfur.dioxide <- as.numeric( sub(",","\\.", wine$free.sulfur.dioxide))
+wine$total.sulfur.dioxide <- as.numeric( sub(",","\\.", wine$total.sulfur.dioxide))
+wine$density <- as.numeric( sub(",","\\.", wine$density))
+wine$pH <- as.numeric( sub(",","\\.", wine$pH))
+wine$sulphates <- as.numeric( sub(",","\\.", wine$sulphates))
+wine$alcohol <- as.numeric( sub(",","\\.", wine$alcohol))
+
+```
+
+```{r}
+tipos <- sapply(wine,class)
+kable(tipos)
+```
+
 ##¿Los datos contienen ceros o elementos vacíos? ¿Cómo gestionarías cada uno de estos casos?
+
+Comprobemos en primer lugar qué atributos contienen ceros:
+
+```{r}
+kable(summary(wine))
+```
+
+Solo existen en el atributo _citric.acid_. Consideramos que se trata de valores correctos.
+
+
+Ahora comprobamos si existen elementos vacíos:
+
+```{r}
+kable(sapply(wine, function(x) sum(is.na(x))))
+```
+
+No existen elementos vacíos, por tanto no hay que gestionar ningún caso, en caso de existir, podríamos o bien eliminar las filas con algún valor vacío, o reemplazar este valor empleando un algoritmo como el kNN.
+
 ##Identificación y tratamiento de valores extremos.
+
+Para cada atributo vamos a mostrar su diagrama de caja y el valor de los valores extremos:
+
+```{r}
+boxplot(wine$fixed.acidity, main="fixed.acidity")
+boxplot.stats(wine$fixed.acidity)$out
+boxplot(wine$volatile.acidity, main="volatile.acidity")
+boxplot.stats(wine$volatile.acidity)$out
+boxplot(wine$citric.acid, main="citric.acid")
+boxplot.stats(wine$citric.acid)$out
+boxplot(wine$residual.sugar, main="residual.sugar")
+boxplot.stats(wine$residual.sugar)$out
+boxplot(wine$chlorides, main="chlorides")
+boxplot.stats(wine$chlorides)$out
+boxplot(wine$free.sulfur.dioxide, main="free.sulfur.dioxide")
+boxplot.stats(wine$free.sulfur.dioxide)$out
+boxplot(wine$total.sulfur.dioxide, main="total.sulfur.dioxide")
+boxplot.stats(wine$total.sulfur.dioxide)$out
+boxplot(wine$density, main="density")
+boxplot.stats(wine$density)$out
+boxplot(wine$pH, main="pH")
+boxplot.stats(wine$pH)$out
+boxplot(wine$sulphates, main="sulphates")
+boxplot.stats(wine$sulphates)$out
+boxplot(wine$alcohol, main="alcohol")
+boxplot.stats(wine$alcohol)$out
+```
+
+**FALTA EL TRATAMIENTO**
+
+**FALTA EL TRATAMIENTO**
+
+
 
 #Análisis de los datos.
 ##Selección de los grupos de datos que se quieren analizar/comparar (planificación de los análisis a aplicar).
