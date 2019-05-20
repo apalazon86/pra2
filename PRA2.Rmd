@@ -86,7 +86,7 @@ tipos <- sapply(wine,class)
 kable(tipos)
 ```
 
-##¿Los datos contienen ceros o elementos vacíos? ¿Cómo gestionarías cada uno de estos casos?
+##¿Los datos contienen ceros o elementos vacíos? Â¿Cómo gestionarías cada uno de estos casos?
 
 Comprobemos en primer lugar qué atributos contienen ceros:
 
@@ -142,15 +142,42 @@ boxplot.stats(wine$alcohol)$out
 
 #Análisis de los datos.
 ##Selección de los grupos de datos que se quieren analizar/comparar (planificación de los análisis a aplicar).
+
+**Agrupación por graduación alcohólica.
+```{r}
+wine.bajaG <- wine[wine$alcohol < 9.5,]
+wine.altaG <- wine[wine$alcohol > 11.1,]
+```
+
+**Agrupación por nivel de acidez volátil
+```{r}
+wine.bajaAV <- wine[wine$volatile.acidity < 0.39,]
+wine.altaAV <- wine[wine$volatile.acidity > 0.64,]
+```
+
+
 ##Comprobación de la normalidad y homogeneidad de la varianza.
+
+
+
 ##Aplicación de pruebas estadísticas para comparar los grupos de datos. 
 
 **En función de los datos y el objetivo del estudio, aplicar pruebas de contraste de hipótesis, correlaciones, regresiones, etc. Aplicar al menos tres métodos de análisis diferentes.**
 
+**Correlaciones
+```{r}
+boxplot(wine$alcohol~wine$quality)
+```
+```{r}
+boxplot(wine$volatile.acidity~wine$quality)
+```
+
+
+
 #Representación de los resultados a partir de tablas y gráficas.
 
 #Resolución del problema.
-**A partir de los resultados obtenidos, ¿cuáles son las conclusiones? ¿Los resultados permiten responder al problema?**
+**A partir de los resultados obtenidos, Â¿cuáles son las conclusiones? Â¿Los resultados permiten responder al problema?**
 
 #Código
 **Hay que adjuntar el código, preferiblemente en R, con el que se ha realizado la limpieza, análisis y representación de los datos. Si lo preferís, también podéis trabajar en Python.**
