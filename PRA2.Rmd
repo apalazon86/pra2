@@ -167,14 +167,15 @@ col.names = colnames(wine)
 
 for(i in 1:ncol(wine)){
   p_val = lillie.test(wine[,i])$p.value
+  #p_val = shapiro.test(wine[,i])$p.value
   if(p_val>alpha){
     cat(col.names[i])
     cat(" sigue una distribución normal\n")
   }
   else{
     cat(col.names[i])
-    cat(" no sigue una distribución normal\n")
-    qqnorm(wine[,i])
+    cat(" NO sigue una distribución normal\n")
+    qqnorm(wine[,i], main=col.names[i])
     qqline(wine[,i])
   }
 }
@@ -185,6 +186,15 @@ FALTA HOMOGENEIDAD DE LA VARIANZA
 FALTA HOMOGENEIDAD DE LA VARIANZA
 FALTA HOMOGENEIDAD DE LA VARIANZA
 FALTA HOMOGENEIDAD DE LA VARIANZA AQUÍ HAY UN EJEMPLO PERO HABRÏA QUE PENSAR BIEN LOS GRUPOS ELEGIDOS EN 4.1 y usarlos tanto aquí como en el siguiente apartado
+
+Homogeneidad de la varianza (https://rpubs.com/Joaquin_AR/218466)
+```{r}
+fligner.test(x = list(wine["pH"],wine["alcohol"]))
+```
+
+
+
+
 
 ```{r}
 
