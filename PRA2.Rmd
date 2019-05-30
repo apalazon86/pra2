@@ -133,15 +133,6 @@ boxplot(wine$alcohol, main="alcohol")
 boxplot.stats(wine$alcohol)$out
 ```
 
-**FALTA EL TRATAMIENTO**
-
-**FALTA EL TRATAMIENTO**
-
-EJEMPLO DE COMO SE ELIMINARIAN LOS OUTLIERS DE UNA VARIABLE
-
-outliers <- boxplot(wine$fixed.acidity, plot=FALSE)$out
-wine <- wine[-which(wine$fixed.acidity %in% outliers),]
-
 
 #Análisis de los datos.
 ##Selección de los grupos de datos que se quieren analizar/comparar (planificación de los análisis a aplicar).
@@ -182,17 +173,15 @@ for(i in 1:ncol(wine)){
 ````
 
 
-FALTA HOMOGENEIDAD DE LA VARIANZA
-FALTA HOMOGENEIDAD DE LA VARIANZA
-FALTA HOMOGENEIDAD DE LA VARIANZA
-FALTA HOMOGENEIDAD DE LA VARIANZA AQUÍ HAY UN EJEMPLO PERO HABRÏA QUE PENSAR BIEN LOS GRUPOS ELEGIDOS EN 4.1 y usarlos tanto aquí como en el siguiente apartado
-
-Homogeneidad de la varianza (https://rpubs.com/Joaquin_AR/218466)
+Homogeneidad de la varianza
 ```{r}
-fligner.test(x = list(wine["pH"],wine["alcohol"]))
+fligner.test(pH ~ alcohol, data = wine)
 ```
 
 
+```{r}
+fligner.test(volatile.acidity ~ alcohol, data = wine)
+```
 
 
 
