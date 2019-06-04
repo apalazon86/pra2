@@ -213,13 +213,13 @@ model <- lm(quality ~ alcohol + sulphates + volatile.acidity, data=wine)
 summary(model)
 ```
 
-El coeficiente de determinación es 0.3359, es un ajuste bastante pobre, el modelo es capaz de explicar el 34% de la variabilidad observada en la calidad del vino. Todaas las variables tienen una influencia muy significativa en la calidad pues tienen un p-valor cercano a 0. Según el modelo cada grado que aumenta el alcohol aumenta un 0.31 la calidad del vino, un aumento de una unidad en los sulfatos aumenta la calidad del vino en 0.68 puntos, mientras que por cada aumento de una unidad de la acidez volatil disminuye 1.22 puntos la calidad del vino.
+El coeficiente de determinación es 0.3359, es un ajuste bastante pobre, el modelo es capaz de explicar el 34% de la variabilidad observada en la calidad del vino. Todas las variables tienen una influencia muy significativa en la calidad pues tienen un p-valor cercano a 0. Según el modelo cada grado que aumenta el alcohol aumenta un 0.31 la calidad del vino, un aumento de una unidad en los sulfatos aumenta la calidad del vino en 0.68 puntos, mientras que por cada aumento de una unidad de la acidez volatil disminuye 1.22 puntos la calidad del vino.
 
 ###Modelo de regresión logística###
 
 Se desea evaluar la calidad predictiva de las variables del modelo de regresión lineal respecto a la predicción de que un vino sea bueno.
 
-Por tanto, se evaluará la probabilidad de que un individuo sea bueno. Para evaluar esta probabilidad se aplicará un modelo de regresión logística, donde la variable depediente será una variable binaria que indicará si el vino es bueno. Se usará la muestra disponible para estimar el modelo con las mismas variables que en el modelo de regresión lineal.
+Por tanto, se evaluará la probabilidad de que un vino sea bueno. Para evaluar esta probabilidad se aplicará un modelo de regresión logística, donde la variable depediente será una variable binaria que indicará si el vino es bueno. Se usará la muestra disponible para estimar el modelo con las mismas variables que en el modelo de regresión lineal.
 
 El primer paso será crear una variable binaria (good) que indique la condición de que el vino sea bueno (good = 1) o no (good = 0). Tendremos un  modelo de regresión logística donde la variable dependiente es “good” y las explicativas son alcohol, sulphates y volatile.acidity.
 
