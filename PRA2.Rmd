@@ -17,6 +17,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r load_libraries, include=FALSE}
 library(knitr)
+library(ggplot2)
 ```
 
 #Descripción del dataset
@@ -133,20 +134,33 @@ boxplot(wine$alcohol, main="alcohol")
 boxplot.stats(wine$alcohol)$out
 ```
 
+Se observa que algunas de las variables tienen bastantes outliers, sin embargo, no los vamos a eliminar, pues a priori no sabemos si se deben a errores con los instrumentos de medida, o son valores que se han medido correctamente y que por tanto deban estar presentes.
 
 #Análisis de los datos.
 ##Selección de los grupos de datos que se quieren analizar/comparar (planificación de los análisis a aplicar).
 
-**Agrupación por graduación alcohólica.**
+Vamos a ver cómo se distribuye la calidad del vino mediante un histograma:
+
 ```{r}
-wine.bajaG <- wine[wine$alcohol < 9.5,]
-wine.altaG <- wine[wine$alcohol > 11.1,]
+ggplot(wine, aes(x=quality)) + geom_bar()
 ```
-**Agrupación por nivel de acidez volátil**
+
+Y la correlación entre variables:
+
 ```{r}
-wine.bajaAV <- wine[wine$volatile.acidity < 0.39,]
-wine.altaAV <- wine[wine$volatile.acidity > 0.64,]
+library(GGally)
+ggcorr(wine, label = TRUE)
 ```
+
+Vemos que la calidad del vino se distribuye de manera similar entre vino con calidad 5 o menos, y de 6 o más, así que vamos a hacer un grupo con vinos malos y otro con vinos buenos.
+
+Por otra parte, nos vamos a quedar solamente con las variables que están más correlacionadas con la calidad, que son el alcohol, los sulfatos, y la acidez volatil.
+
+```{r}
+wine.bad <- wine[wine$quality < 6,c("quality","alcohol","sulphates","volatile.acidity")]
+wine.good <- wine[wine$quality > 5,c("quality","alcohol","sulphates","volatile.acidity")]
+```
+
 ##Comprobación de la normalidad y homogeneidad de la varianza.
 
 En primer lugar, comprobamos si las variables siguen o no una distribución normal, para ello usaremos una correción de la prueba de Kolmogorov-Smirnov, llamada “la corrección de Lilliefors”. Para las variables que no siguen la distribución normal, además de la comprobación analítica, mostraremos su gráfica de cuantiles teóricos o gráfica Q-Q para verificar que el resultado analítico es correcto:
@@ -155,7 +169,6 @@ En primer lugar, comprobamos si las variables siguen o no una distribución norm
 library(nortest)
 alpha = 0.05
 col.names = colnames(wine)
-
 for(i in 1:ncol(wine)){
   p_val = lillie.test(wine[,i])$p.value
   #p_val = shapiro.test(wine[,i])$p.value
@@ -186,20 +199,54 @@ fligner.test(volatile.acidity ~ alcohol, data = wine)
 
 
 ```{r}
-
 fligner.test(fixed.acidity ~ volatile.acidity, data = wine)
-
 ```
 ##Aplicación de pruebas estadísticas para comparar los grupos de datos. 
 **En función de los datos y el objetivo del estudio, aplicar pruebas de contraste de hipótesis, correlaciones, regresiones, etc. Aplicar al menos tres métodos de análisis diferentes.**
 
-**Correlaciones**
+###Modelo de regresión lineal###
+
+Vamos a realizar un modelo de regresión lineal, para predecir la calidad de un vino, a partir de las variables alcohol, sulfatos, y acidez volatil.
+
 ```{r}
-boxplot(wine$alcohol~wine$quality)
+model <- lm(quality ~ alcohol + sulphates + volatile.acidity, data=wine)
+summary(model)
 ```
+
+El coeficiente de determinación es 0.3359, es un ajuste bastante pobre, el modelo es capaz de explicar el 34% de la variabilidad observada en la calidad del vino. Todaas las variables tienen una influencia muy significativa en la calidad pues tienen un p-valor cercano a 0. Según el modelo cada grado que aumenta el alcohol aumenta un 0.31 la calidad del vino, un aumento de una unidad en los sulfatos aumenta la calidad del vino en 0.68 puntos, mientras que por cada aumento de una unidad de la acidez volatil disminuye 1.22 puntos la calidad del vino.
+
+###Modelo de regresión logística###
+
+Se desea evaluar la calidad predictiva de las variables del modelo de regresión lineal respecto a la predicción de que un vino sea bueno.
+
+Por tanto, se evaluará la probabilidad de que un individuo sea bueno. Para evaluar esta probabilidad se aplicará un modelo de regresión logística, donde la variable depediente será una variable binaria que indicará si el vino es bueno. Se usará la muestra disponible para estimar el modelo con las mismas variables que en el modelo de regresión lineal.
+
+El primer paso será crear una variable binaria (good) que indique la condición de que el vino sea bueno (good = 1) o no (good = 0). Tendremos un  modelo de regresión logística donde la variable dependiente es “good” y las explicativas son alcohol, sulphates y volatile.acidity.
+
+Creamos la variable binaria y mostramos las primeras filas para comprobar el resultado:
+
 ```{r}
-boxplot(wine$volatile.acidity~wine$quality)
+wine$good<- ifelse(wine$quality >5, 1, 0)
+kable(head(wine[, c("quality","good")]))
 ```
+
+Creamos el modelo:
+
+```{r}
+modelo2 = glm(good ~ alcohol + sulphates + volatile.acidity, data = wine, family=binomial)
+summary(modelo2)
+```
+
+Todos los regresores tienen influencia significativa, podríamos utilizar este modelo para ver la probabilidad de que un vino sea bueno bajo determinadas circustancias:
+
+```{r}
+new = data.frame(alcohol=12, sulphates=1, volatile.acidity=0.8)
+predict(modelo2, new, type="response")
+```
+
+Según el modeo, las posibilidades de que un vino de estas características sea bueno es de un 84%.
+
+###Contraste de hipótesis###
 
 #Representación de los resultados a partir de tablas y gráficas.
 
