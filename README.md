@@ -8,10 +8,10 @@ Miembros del equipo:
 * ALFONSO PALAZÓN GONZALEZ
 * DANIEL MIRÓN MARTÍNEZ
 
-La práctica se ha hecho en un notebook de R mediante R Markdown, el archivo con el código R Markdown es PRA2.Rmd.
+* **PRA2.Rmd**: Archivo con el código R. La práctica se ha hecho en un notebook de R mediante R Markdown.
 
-El notebook se ha exportado a HTML, el archivo PRA2.html contiene todas las respuestas de la práctica.
+* **PRA2.html**: Archivo  contiene todas las respuestas de la práctica, el notebook se ha exportado a HTML.
 
-Todos los fragmentos de código del archivo Rmd se pueden encontrar en el archivo PRA2.R.
+* **PRA2.R**: Todos los fragmentos de código del archivo Rmd se pueden encontrar en este archivo.
 
-Por último, tenemos el archivo con el dataset empleado winequality-red.csv, no se han modificado cambios sobre el mismo.
+* **winequality-red.csv**: Por último, tenemos el archivo con el dataset empleado, no se han realizado cambios sobre el mismo.
