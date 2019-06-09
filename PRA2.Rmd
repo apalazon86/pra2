@@ -205,7 +205,6 @@ var.test(wine.bad$volatile.acidity, wine.good$volatile.acidity)
 En los tres casos obtenemos un p-value menor a 0,05, por tanto se rechaza la hipótesis nula.
 No hay homogeneidad de varianzas.
 
-
 ##Aplicación de pruebas estadísticas para comparar los grupos de datos. 
 **En función de los datos y el objetivo del estudio, aplicar pruebas de contraste de hipótesis, correlaciones, regresiones, etc. Aplicar al menos tres métodos de análisis diferentes.**
 
@@ -249,7 +248,7 @@ new = data.frame(alcohol=12, sulphates=1, volatile.acidity=0.8)
 predict(modelo2, new, type="response")
 ```
 
-Según el modeo, las posibilidades de que un vino de estas características sea bueno es de un 84%.
+Según el modelo, las posibilidades de que un vino de estas características sea bueno es de un 84%.
 
 ###Contraste de hipótesis###
 
@@ -285,12 +284,44 @@ t.test(
 ```
 No podemos rechazar en este caso la hipótesis nula, por tanto no podemos afirmar que el nivel de sulfatos sea superior al primer cuartil de la muestra para los vinos buenos.
 
-
-
 #Representación de los resultados a partir de tablas y gráficas.
+
+Vamos a ver cómo si distribuyen los vinos buenos y malos en función de las variables alcohol, sulfatos, y acidez volatil
+
+```{r}
+ggplot(wine, aes(x = alcohol, y = sulphates)) +
+    geom_point(aes(color = factor(good)))
+
+```
+
+Se observa que los vinos de menos calidad se agrupan en la parte inferior izquierda del gráfico, es decir los vinos con pocos sulfatos y con poco alcohol son de baja calidad. Mientras que los vinos buenos tienen niveles superiores tanto de alcohol como de sulfatos.
+
+```{r}
+ggplot(wine, aes(x = alcohol, y = volatile.acidity)) +
+    geom_point(aes(color = factor(good)))
+
+```
+
+En esta segunda gráfica podemos comprobar que los vinos malos tienen una acidez volatil mayor que los vinos de mayor calidad.
+
+```{r}
+ggplot(wine, aes(x = sulphates, y = volatile.acidity)) +
+    geom_point(aes(color = factor(good)))
+
+```
+
+En esta última gráfica terminamos de confirmar lo expuesto anterioremente, los vinos con poco nivel de sulfatos y alto nivel de acidez volatil son peores que los vinos con menor acidez volatil y mayor nivel de sulfatos.
 
 #Resolución del problema.
 **A partir de los resultados obtenidos, ¿cuáles son las conclusiones? ¿Los resultados permiten responder al problema?**
+
+Las conclusiones a las que se llega tras realizar análisis de covarianza entre variables, así como las distintas pruebas estadísticas es que la calidad del vino viene determinada principalmente por las variables alcohol, sulfatos y acidez volatil.
+
+Se ha observado que los vinos con peor calidad tienen niveles de alcohol y de sulfatos menores que los de mayor calidad, además de una acidez volatil mayor.
+
+Los resultados permiten responder parcialmente al problema, existen muchas más variables que pueden influir en la calidad del vino, por otra parte, la calidad de un vino no deja de estar sujeta a la subjetividad de la persona que lo prueba, por lo que es complicado llegar a resultados totalmente concluyentes.
+
+En todo caso, estos resultados pueden ser un buen punto de partida a la hora de elaborar vinos, o de recomendarlos a uno u otro tipo de cliente.
 
 #Código
 **Hay que adjuntar el código, preferiblemente en R, con el que se ha realizado la limpieza, análisis y representación de los datos. Si lo preferís, también podéis trabajar en Python.**
