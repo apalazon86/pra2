@@ -188,19 +188,24 @@ for(i in 1:ncol(wine)){
 
 Homogeneidad de la varianza
 ```{r}
-fligner.test(pH ~ alcohol, data = wine)
+var.test(wine.bad$alcohol, wine.good$alcohol)
 ```
 
 
 ```{r}
-fligner.test(volatile.acidity ~ alcohol, data = wine)
+var.test(wine.bad$sulphates, wine.good$sulphates)
 ```
 
 
 
 ```{r}
-fligner.test(fixed.acidity ~ volatile.acidity, data = wine)
+var.test(wine.bad$volatile.acidity, wine.good$volatile.acidity)
 ```
+
+En los tres casos obtenemos un p-value menor a 0,05, por tanto se rechaza la hipótesis nula.
+No hay homogeneidad de varianzas.
+
+
 ##Aplicación de pruebas estadísticas para comparar los grupos de datos. 
 **En función de los datos y el objetivo del estudio, aplicar pruebas de contraste de hipótesis, correlaciones, regresiones, etc. Aplicar al menos tres métodos de análisis diferentes.**
 
@@ -247,6 +252,40 @@ predict(modelo2, new, type="response")
 Según el modeo, las posibilidades de que un vino de estas características sea bueno es de un 84%.
 
 ###Contraste de hipótesis###
+
+Vamos a comprobar si la media de los ácidos volátiles es menor en los vinos buenos:
+
+```{r}
+t.test(
+  wine.bad$volatile.acidity,
+  wine.good$volatile.acidity,
+  alternative = "less"
+)
+```
+Rechazada la hipótesis nula, podemos decir que la media en los vinos buenos es menor.
+
+
+Ahora vamos a comprobar si los vinos buenos tienen más alcohol de media que los malos:
+```{r}
+t.test(
+  wine.bad$alcohol,
+  wine.good$alcohol,
+  alternative="greater"
+)
+```
+Rechazada la hipotesis nula, comprobamos que los vinos buenos tienen de media más alcohol.
+
+Ahora vamos a comprobar si los vinos buenos, tienen un nivel de sulfatos superior a 0,55 (primer cuartil):
+```{r}
+t.test(
+  wine.good$sulphates, 
+  mu=0.55,
+  alternative = "greater"
+)
+```
+No podemos rechazar en este caso la hipótesis nula, por tanto no podemos afirmar que el nivel de sulfatos sea superior al primer cuartil de la muestra para los vinos buenos.
+
+
 
 #Representación de los resultados a partir de tablas y gráficas.
 
